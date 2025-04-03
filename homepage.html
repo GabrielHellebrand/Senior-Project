@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Movies</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script defer src="./scripts/favorites.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>My Favorite Movies</h1>
+            <div id="user-info">
+                <span id="username">ThatFilmBro</span> <!-- Placeholder for dynamic username -->
+            </div>
+        </div>
+    </header>
+    <main>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Database</a></li>
+                <li><a href="./boxoffice.html">Box Office</a></li>
+                <li><a href="./comingsoon.html">Coming Soon</a></li>
+                <li><a href="./login.html">login</a></li>
+                <li><a href="./signup.html">Sign Up</a></li>
+                <li><a href="./collection.html">Movie Collection</a></li>
+                <div id="context-menu">
+                    <ul>
+                        <li id="context-add">Add to Collection</li>
+                        <li id="context-remove">Remove from Collection</li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+        <section id="favorites-section" class="movie-list">
+            <h2>Add Your Top 10 Favorite Movies</h2>
+            <div class="search-container">
+                <input type="text" id="movie-input" placeholder="Enter movie title...">
+                <button id="add-movie">Add Movie</button>
+            </div>
+            <div class="movies" id="favorites-list">
+                <!-- Favorite movies will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
