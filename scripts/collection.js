@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const collection = JSON.parse(localStorage.getItem("movieCollection")) || [];
     const collectionContainer = document.getElementById("collection-container");
 
+    
     function displayCollection() {
         collectionContainer.innerHTML = "";
 
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             collectionContainer.appendChild(movieElement);
         });
+        
 
         // This is an event listener for when the user wants to remove a movie from there collection
         document.querySelectorAll(".remove-from-collection").forEach(button => {

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const collection = JSON.parse(localStorage.getItem("movieCollection")) || [];
     const collectionContainer = document.getElementById("collection-container");
     const contextMenu = document.getElementById("context-menu");
-    let selectedMovie = null; // Store the right-clicked movie
+    let selectedMovie = null; // Store the movie when the user right clicks
 
     function updateCollectionDisplay() {
         collectionContainer.innerHTML = "";
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".movie").forEach(movie => {
         movie.addEventListener("contextmenu", function (event) {
             event.preventDefault(); // Prevent default right-click menu
-            selectedMovie = this.querySelector("h3").textContent; // Get movie title
+            selectedMovie = this.querySelector("h3").textContent; // Gets the movie title
 
             // Show custom context menu
             contextMenu.style.top = `${event.pageY}px`;
@@ -74,18 +74,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedMovie) {
             addToCollection(selectedMovie);
         }
-        contextMenu.style.display = "none"; // Hide menu
+        contextMenu.style.display = "none"; // Hides the menu
     });
 
     document.getElementById("context-remove").addEventListener("click", function () {
         if (selectedMovie) {
             removeFromCollection(selectedMovie);
         }
-        contextMenu.style.display = "none"; // Hide menu
+        contextMenu.style.display = "none"; // Hides the menu
     });
 
     document.addEventListener("click", function () {
-        contextMenu.style.display = "none"; // Hide menu when clicking anywhere else
+        contextMenu.style.display = "none"; // Hides the menu when clicking anywhere else
     });
 
     updateCollectionDisplay();

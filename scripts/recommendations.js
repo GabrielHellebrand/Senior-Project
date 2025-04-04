@@ -31,7 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
         "Cheaper By The Dozen": ["Miracle", "Spider-Man 2", "The Spongebob Squarepants Movie", "Shrek 2", "Garfield"],
         "Shrek 2": ["Harry Potter and The Prisoner of Azkaban", "Two Brothers", "Spider-Man 2", "Garfield", "Shark Tale"],
         "Harry Potter & the Prisoner of Azkaban": ["The Spongebob Squarepants Movie", "A Series of Unfortunate Events", "The Terminal", "Spider-Man 2", "Garfield The Movie", "Catwoman", "The Polar Express"],
-        "":[]
+        "Napoleon Dynamite":["Sky Captain and The World of Tomorrow", "The Incredibles", "The Polar Express", "National Treasure", "The Ringer"],
+        "The Incredibles":["National Treasure", "Chicken Little", "Star Wars: Revenge of The Sith", "Madagascar", "Christmas With The Kranks", "Cars"],
+        "The Polar Express": ["Because of Winn-Dixie", "A Series of Unfortunate Events", "Madagascar", "Robots", "Chicken Little"],
+        "National Treasure": ["Elektra", "Son of The Mask", "Oceans 12", "The Pacifier", "Chicken Little", "The Hitchiker's Guide to The Galaxy"],
+        "The Spongebob Squarepants Movie": ["Robots", "Pooh's Huffalump Movie", "Madagascar", "A Series of Unfortunate Events"]
     };
 // Default recommendations
     function generateRecommendations(collection) {
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const movieElement = document.createElement("div");
             movieElement.classList.add("recommended-movie");
 
-            // Create image element
+            // // Create image element
             const img = document.createElement("img");
             img.src = `./images/${movie}.png`; // images are named after movie titles
             img.alt = movie;
