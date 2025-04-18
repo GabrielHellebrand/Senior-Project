@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommender</h1>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Database</a></li>
+                <li><a href="./boxoffice.html">Box Office</a></li>
+                <li><a href="./comingsoon.html">Coming Soon</a></li>
+                <li><a href="./login.html">login</a></li>
+                <li><a href="./signup.html">Sign Up</a></li>
+                <li><a href="./collection.html">Movie Collection</a></li>
+                <li><a href="./homepage.html">Homepage</a></li>
+                <div id="context-menu">
+                    <ul>
+                        <li id="context-add">Add to Collection</li>
+                        <li id="context-remove">Remove from Collection</li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+        <div id="user-info"></div> <!-- Username display -->
+        <input type="text" id="search-bar" placeholder="Search movies...">
+    </header> <main>
+        <section class="movie-list">
+            <h2>July 2 1999</h2>
+            <div class="movies">
+                <div class="movie">
+                    <img src="./images/Wild Wild West.png" alt="Wild Wild West">
+                    <h3>Wild Wild West</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Big Daddy.png" alt="Big Daddy">
+                    <h3>Big Daddy</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Tarzan.png" alt="Tarzan">
+                    <h3>Tarzan</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/South Park Bigger, Longer & Uncut.png" alt="South Park: Bigger, Longer & Uncut">
+                    <h3>South Park: Bigger, Longer & Uncut</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Generals Daughter.png" alt="The General's Daughter">
+                    <h3>The General's Daughter</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Star Wars The Phantom Menace.png" alt="Star Wars: The Phantom Menace">
+                    <h3>Star Wars: The Phantom Menace</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Austin Powers The Spy Who Shagged Me.png" alt="Austin Powers: The Spy Who Shagged Me">
+                    <h3>Austin Powers: The Spy Who Shagged Me</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Summer of Sam.png" alt="Summer of Sam">
+                    <h3>Summer of Sam</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Notting Hill.png" alt="Notting Hill">
+                    <h3>Notting Hill</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/An Ideal Husband.png" alt="An Ideal Husband">
+                    <h3>An Ideal Husband</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Mummy.png" alt="The Mummy">
+                    <h3>The Mummy</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Red Violin.png" alt="The Red Violin">
+                    <h3>The Red Violin</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Instinct.png" alt="Instinct">
+                    <h3>Instinct</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Shakespeare in Love.png" alt="Shakespeare in Love">
+                    <h3>Shakespeare in Love</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Tea with Mussolini.png" alt="Tea with Mussolini">
+                    <h3>Tea with Mussolini</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Matrix.png" alt="The Matrix">
+                    <h3>The Matrix</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Entrapment.png" alt="Entrapment">
+                    <h3>Entrapment</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Run Lola Run.png" alt="Run Lola Run">
+                    <h3>Run Lola Run</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Mysteries of Egypt.png" alt="Mysteries of Egypt">
+                    <h3>Mysteries of Egypt</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Buena Vista Social Club.png" alt="Buena Vista Social Club">
+                    <h3>Buena Vista Social Club</h3>
+                </div>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page99.html" class="next-page">→</a>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page97.html" class="prev-page">←</a>
+            </div>
+        </main>
+        </section>
+    </main>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/movie-detail.js"></script>
+    <script src="./scripts/recommendations.js"></script>
+</body>
+</html>
