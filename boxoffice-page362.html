@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommender</h1>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Database</a></li>
+                <li><a href="./boxoffice.html">Box Office</a></li>
+                <li><a href="./comingsoon.html">Coming Soon</a></li>
+                <li><a href="./login.html">login</a></li>
+                <li><a href="./signup.html">Sign Up</a></li>
+                <li><a href="./collection.html">Movie Collection</a></li>
+                <li><a href="./homepage.html">Homepage</a></li>
+                <div id="context-menu">
+                    <ul>
+                        <li id="context-add">Add to Collection</li>
+                        <li id="context-remove">Remove from Collection</li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+        <div id="user-info"></div> <!-- Username display -->
+        <input type="text" id="search-bar" placeholder="Search movies...">
+    </header> <main>
+        <section class="movie-list">
+            <h2>July 23 2004</h2>
+            <div class="movies">
+                <div class="movie">
+                    <img src="./images/The Bourne Supremacy.png" alt="The Bourne Supremacy">
+                    <h3>The Bourne Supremacy</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/I Robot.png" alt="I, Robot">
+                    <h3>I, Robot</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Catwoman.png" alt="Catwoman">
+                    <h3>Catwoman</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Spider-Man 2.png" alt="Spider-Man 2">
+                    <h3>Spider-Man 2</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/A Cinderella Story.png" alt="A Cinderella Story">
+                    <h3>A Cinderella Story</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Anchorman The Legend of Ron Burgundy.png" alt="Anchorman: The Legend of Ron Burgundy">
+                    <h3>Anchorman: The Legend of Ron Burgundy</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Fahrenheit 9 11.png" alt="Fahrenheit 9/11">
+                    <h3>Fahrenheit 9/11</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Notebook.png" alt="The Notebook">
+                    <h3>The Notebook</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/King Arthur.png" alt="King Arthur">
+                    <h3>King Arthur</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Shrek 2.png" alt="Shrek 2">
+                    <h3>Shrek 2</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Dodgeball A True Underdog Story.png" alt="Dodgeball: A True Underdog Story">
+                    <h3>Dodgeball: A True Underdog Story</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Harry Potter and the Prisoner of Azkaban.png" alt="Harry Potter and the Prisoner of Azkaban">
+                    <h3>Harry Potter and the Prisoner of Azkaban</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Terminal.png" alt="The Terminal">
+                    <h3>The Terminal</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/De-Lovely.png" alt="De-Lovely">
+                    <h3>De-Lovely</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/White Chicks.png" alt="White Chicks">
+                    <h3>White Chicks</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Napoleon Dynamite.png" alt="Napoleon Dynamite">
+                    <h3>Napoleon Dynamite</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Garfield The Movie.png" alt="Garfield: The Movie">
+                    <h3>Garfield: The Movie</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Clearing.png" alt="The Clearing">
+                    <h3>The Clearing</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Door in the Floor.png" alt="The Door in the Floor">
+                    <h3>The Door in the Floor</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Before Sunset.png" alt="Before Sunset">
+                    <h3>Before Sunset</h3>
+                </div>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page363.html" class="next-page">→</a>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page361.html" class="prev-page">←</a>
+            </div>
+        </main>
+        </section>
+    </main>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/movie-detail.js"></script>
+    <script src="./scripts/recommendations.js"></script>
+</body>
+</html>
