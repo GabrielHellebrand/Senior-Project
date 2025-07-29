@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommender</h1>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Database</a></li>
+                <li><a href="./boxoffice.html">Box Office</a></li>
+                <li><a href="./comingsoon.html">Coming Soon</a></li>
+                <li><a href="./login.html">login</a></li>
+                <li><a href="./signup.html">Sign Up</a></li>
+                <li><a href="./collection.html">Movie Collection</a></li>
+                <li><a href="./homepage.html">Homepage</a></li>
+                <div id="context-menu">
+                    <ul>
+                        <li id="context-add">Add to Collection</li>
+                        <li id="context-remove">Remove from Collection</li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+        <div id="user-info"></div> <!-- Username display -->
+        <input type="text" id="search-bar" placeholder="Search movies...">
+    </header> <main>
+        <section class="movie-list">
+            <h2>July 1 2005</h2>
+            <div class="movies">
+                <div class="movie">
+                    <img src="./images/War of the Worlds.png" alt="War of the Worlds">
+                    <h3>War of the Worlds</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Batman Begins.png" alt="Batman Begins">
+                    <h3>Batman Begins</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Mr. & Mrs. Smith.png" alt="Mr. & Mrs. Smith">
+                    <h3>Mr. & Mrs. Smith</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Bewitched.png" alt="Bewitched">
+                    <h3>Bewitched</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Herbie Fully Loaded.png" alt="Herbie: Fully Loaded">
+                    <h3>Herbie: Fully Loaded</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Madagascar.png" alt="Madagascar">
+                    <h3>Madagascar</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Rebound.png" alt="Rebound">
+                    <h3>Rebound</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Star Wars Revenge of The Sith.png" alt="Star Wars: Revenge of The Sith">
+                    <h3>Star Wars: Revenge of The Sith</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Longest Yard.png" alt="The Longest Yard">
+                    <h3>The Longest Yard</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Land of the Dead.png" alt="Land of the Dead">
+                    <h3>Land of the Dead</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Cinderella Man.png" alt="Cinderella Man">
+                    <h3>Cinderella Man</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Adventures of Sharkboy and Lavagirl.png" alt="The Adventures of Sharkboy and Lavagirl">
+                    <h3>The Adventures of Sharkboy and Lavagirl</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Perfect Man.png" alt="The Perfect Man">
+                    <h3>The Perfect Man</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Crash.png" alt="Crash">
+                    <h3>Crash</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Sisterhood of the Traveling Pants.png" alt="The Sisterhood of the Traveling Pants">
+                    <h3>The Sisterhood of the Traveling Pants</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Mad Hot Ballroom.png" alt="Mad Hot Ballroom">
+                    <h3>Mad Hot Ballroom</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/March of the Penguins.png" alt="March of the Penguins">
+                    <h3>March of the Penguins</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Howl's Moving Castle.png" alt="Howl's Moving Castle">
+                    <h3>Howl's Moving Castle</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Monster-in-Law.png" alt="Monster-in-Law">
+                    <h3>Monster-in-Law</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Ladies in Lavender.png" alt="Ladies in Lavender">
+                    <h3>Ladies in Lavender</h3>
+                </div>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page412.html" class="next-page">→</a>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page410.html" class="prev-page">←</a>
+            </div>
+        </main>
+        </section>
+    </main>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/movie-detail.js"></script>
+    <script src="./scripts/recommendations.js"></script>
+</body>
+</html>
