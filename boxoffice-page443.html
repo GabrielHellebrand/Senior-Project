@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommender</h1>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Database</a></li>
+                <li><a href="./boxoffice.html">Box Office</a></li>
+                <li><a href="./comingsoon.html">Coming Soon</a></li>
+                <li><a href="./login.html">login</a></li>
+                <li><a href="./signup.html">Sign Up</a></li>
+                <li><a href="./collection.html">Movie Collection</a></li>
+                <li><a href="./homepage.html">Homepage</a></li>
+                <div id="context-menu">
+                    <ul>
+                        <li id="context-add">Add to Collection</li>
+                        <li id="context-remove">Remove from Collection</li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+        <div id="user-info"></div> <!-- Username display -->
+        <input type="text" id="search-bar" placeholder="Search movies...">
+    </header> <main>
+        <section class="movie-list">
+            <h2>February 3 2006</h2>
+            <div class="movies">
+                <div class="movie">
+                    <img src="./images/When a Stranger Calls.png" alt="When a Stranger Calls">
+                    <h3>When a Stranger Calls</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Big Momma's House 2.png" alt="Big Momma's House 2">
+                    <h3>Big Momma's House 2</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Nanny McPhee.png" alt="Nanny McPhee">
+                    <h3>Nanny McPhee</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Brokeback Mountain.png" alt="Brokeback Mountain">
+                    <h3>Brokeback Mountain</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Hoodwinked.png" alt="Hoodwinked">
+                    <h3>Hoodwinked</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Underworld Evolution.png" alt="Underworld: Evolution">
+                    <h3>Underworld: Evolution</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Something New.png" alt="Something New">
+                    <h3>Something New</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Annapolis.png" alt="Annapolis">
+                    <h3>Annapolis</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Walk the Line.png" alt="Walk the Line">
+                    <h3>Walk the Line</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Chronicles of Narnia The Lion, the Witch and the Wardrobe.png" alt="The Chronicles of Narnia: The Lion, the Witch and the Wardrobe">
+                    <h3>The Chronicles of Narnia: The Lion, the Witch and the Wardrobe</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Glory Road.png" alt="Glory Road">
+                    <h3>Glory Road</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Last Holiday.png" alt="Last Holiday">
+                    <h3>Last Holiday</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Capote.png" alt="Capote">
+                    <h3>Capote</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The Matador.png" alt="The Matador">
+                    <h3>The Matador</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Match Point.png" alt="Match Point">
+                    <h3>Match Point</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Munich.png" alt="Munich">
+                    <h3>Munich</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Fun with Dick & Jane.png" alt="Fun with Dick & Jane">
+                    <h3>Fun with Dick & Jane</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/Good Night, and Good Luck.png" alt="Good Night, and Good Luck">
+                    <h3>Good Night, and Good Luck</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/The New World.png" alt="The New World">
+                    <h3>The New World</h3>
+                </div>
+                <div class="movie">
+                    <img src="./images/End of the Spear.png" alt="End of the Spear">
+                    <h3>End of the Spear</h3>
+                </div>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page444.html" class="next-page">→</a>
+            </div>
+            <div class="pagination">
+                <a href="boxoffice-page442.html" class="prev-page">←</a>
+            </div>
+        </main>
+        </section>
+    </main>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/movie-detail.js"></script>
+    <script src="./scripts/recommendations.js"></script>
+</body>
+</html>
