@@ -3,124 +3,743 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Movie Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Graphik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #14181c;
+            color: #9ab;
+            line-height: 1.4;
+        }
+
+        header {
+            background-color: #2c3440;
+            padding: 16px 20px;
+            border-bottom: 1px solid #456;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            color: #00e054;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #9ab;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #00e054;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 8px 12px;
+            background-color: #456;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        #search-bar::placeholder {
+            color: #9ab;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #9ab;
+            font-size: 14px;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .movie-slide {
+            display: flex;
+            min-width: 100%;
+            gap: 12px;
+        }
+
+        .movie {
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            background-color: #2c3440;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .movie:hover {
+            transform: scale(1.02);
+        }
+
+        .movie-poster {
+            width: 100%;
+            aspect-ratio: 27/40;
+            overflow: hidden;
+            position: relative;
+            background-color: #2c3440;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.2s ease;
+        }
+
+        .movie-poster img:not([src]) {
+            background-color: #456;
+        }
+
+        .movie-poster img[src=""] {
+            background-color: #456;
+        }
+
+        .movie-info {
+            padding: 16px 12px;
+            background-color: #2c3440;
+        }
+
+        .movie-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #9ab;
+        }
+
+        .rating-badge {
+            background-color: #456;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .showtimes {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #456;
+        }
+
+        .showtimes-label {
+            font-size: 11px;
+            color: #9ab;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .showtimes-list {
+            font-size: 11px;
+            color: #fff;
+            line-height: 1.4;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .showtime {
+            background-color: #456;
+            padding: 2px 4px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .carousel-nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #456;
+            background: transparent;
+            color: #9ab;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #456;
+            color: #fff;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            color: #9ab;
+            font-size: 14px;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #456;
+        }
+
+        .page-nav-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid #456;
+            color: #9ab;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background: #456;
+            color: #fff;
+        }
+
+        #context-menu {
+            position: absolute;
+            background: #2c3440;
+            border: 1px solid #456;
+            border-radius: 4px;
+            padding: 4px 0;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        #context-menu ul {
+            list-style: none;
+        }
+
+        #context-menu li {
+            padding: 8px 16px;
+            color: #9ab;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        #context-menu li:hover {
+            background: #456;
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            main {
+                padding: 20px 16px;
+            }
+
+            .movie-slide {
+                gap: 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .showtimes-list {
+                font-size: 10px;
+            }
+
+            .movie-info {
+                padding: 12px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-navigation {
+                flex-direction: column;
+            }
+
+            .carousel-controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .movie-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Movie Recommender</h1>
-        <nav>
+        <div class="header-content">
+            <h1>Movie Database</h1>
+            <nav>
                 <ul>
                     <li><a href="./index.html">Database</a></li>
                     <li><a href="./boxoffice.html">Box Office</a></li>
                     <li><a href="./comingsoon.html">Coming Soon</a></li>
-                    <li><a href="./login.html">login</a></li>
+                    <li><a href="./login.html">Login</a></li>
                     <li><a href="./signup.html">Sign Up</a></li>
-                    <li><a href="./collection.html">Movie Collection</a></li>
+                    <li><a href="./collection.html">Collection</a></li>
                     <li><a href="./homepage.html">Homepage</a></li>
-                    <div id="context-menu">
-                        <ul>
-                            <li id="context-add">Add to Collection</li>
-                            <li id="context-remove">Remove from Collection</li>
-                        </ul>
-                    </div>
                 </ul>
-        </nav>
-        <div id="user-info"></div> <!-- Username display -->
-        <input type="text" id="search-bar" placeholder="Search movies...">
-    </header> <main>
-        <section class="movie-list">
-            <h2>August 22 1997</h2>
-            <div class="movies">
-                <div class="movie">
-                    <img src="./images/GI Jane.png" alt="G.I. Jane">
-                    <h3>G.I. Jane</h3>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search films...">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Top 20 Films</h1>
+            <p class="page-subtitle">August 22, 1997 • Box Office Rankings</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-controls">
+                <div class="carousel-nav">
+                    <button class="nav-btn" id="prevBtn">‹</button>
+                    <button class="nav-btn" id="nextBtn">›</button>
                 </div>
-                <div class="movie">
-                    <img src="./images/Money Talks.png" alt="Money Talks">
-                    <h3>Money Talks</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Air Force One.png" alt="Air Force One">
-                    <h3>Air Force One</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Mimic.png" alt="Mimic">
-                    <h3>Mimic</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Conspiracy Theory.png" alt="Conspiracy Theory">
-                    <h3>Conspiracy Theory</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Cop Land.png" alt="Cop Land">
-                    <h3>Cop Land</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Event Horizon.png" alt="Event Horizon">
-                    <h3>Event Horizon</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Leave It To Beaver.png" alt="Leave It To Beaver">
-                    <h3>Leave It To Beaver</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/George of The Jungle.png" alt="George of The Jungle">
-                    <h3>George of The Jungle</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Men In Black.png" alt="Men In Black">
-                    <h3>Men In Black</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Contact.png" alt="Contact">
-                    <h3>Contact</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Picture Perfect.png" alt="Picture Perfect">
-                    <h3>Picture Perfect</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Spawn.png" alt="Spawn">
-                    <h3>Spawn</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Air Bud.png" alt="Air Bud">
-                    <h3>Air Bud</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/A Smile Like Yours.png" alt="A Smile Like Yours">
-                    <h3>A Smile Like Yours</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/My Best Friend's Wedding.png" alt="My Best Friend's Wedding">
-                    <h3>My Best Friend's Wedding</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Masterminds.png" alt="Masterminds">
-                    <h3>Masterminds</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Con Air.png" alt="Con Air">
-                    <h3>Con Air</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Nothing To Lose.png" alt="Nothing To Lose">
-                    <h3>Nothing To Lose</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Face Off.png" alt="Face/Off">
-                    <h3>Face/Off</h3>
+                <div class="slide-counter" id="slideCounter">1 of 5</div>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Movies will be dynamically populated -->
                 </div>
             </div>
-            <div class="pagination">
-                <a href="boxoffice-page2.html" class="next-page">→</a>
+
+            <div class="page-navigation">
+                <a href="boxoffice-page2.html" class="page-nav-btn">Next Week →</a>
             </div>
-        </main>
-        </section>
+        </div>
     </main>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/movie-detail.js"></script>
-    <script src="./scripts/recommendations.js"></script>
+
+    <div id="context-menu">
+        <ul>
+            <li id="context-add">Add to Collection</li>
+            <li id="context-remove">Remove from Collection</li>
+        </ul>
+    </div>
+
+    <script>
+        // Movie data with complete information including number of showings
+        const movieData = [
+            { title: "GI Jane", runtime: 125, rating: "R", showings: 12 },
+            { title: "Money Talks", runtime: 97, rating: "R", showings: 11 },
+            { title: "Air Force One", runtime: 124, rating: "R", showings: 6 },
+            { title: "Mimic", runtime: 105, rating: "R", showings: 7 },
+            { title: "Conspiracy Theory", runtime: 135, rating: "R", showings: 5 },
+            { title: "Cop Land", runtime: 104, rating: "R", showings: 7 },
+            { title: "Event Horizon", runtime: 95, rating: "R", showings: 4 },
+            { title: "Leave It To Beaver", runtime: 84, rating: "PG", showings: 3 },
+            { title: "George of The Jungle", runtime: 92, rating: "PG", showings: 3 },
+            { title: "Men In Black", runtime: 98, rating: "PG-13", showings: 3 },
+            { title: "Contact", runtime: 150, rating: "PG", showings: 3 },
+            { title: "Picture Perfect", runtime: 105, rating: "PG-13", showings: 2 },
+            { title: "Spawn", runtime: 96, rating: "PG-13", showings: 2 },
+            { title: "Air Bud", runtime: 98, rating: "PG", showings: 2 },
+            { title: "A Smile Like Yours", runtime: 98, rating: "R", showings: 4 },
+            { title: "My Best Friend's Wedding", runtime: 105, rating: "PG-13", showings: 2 },
+            { title: "Masterminds", runtime: 106, rating: "PG-13", showings: 1 },
+            { title: "Nothing To Lose", runtime: 97, rating: "R", showings: 2 },
+            { title: "Face/Off", runtime: 139, rating: "R", showings: 1 },
+            { title: "The Lost World Jurassic Park", runtime: 129, rating: "PG-13", showings: 1 },
+        ];
+
+        function generateRealisticShowtimes(runtime, showingCount) {
+            // Theater operates from 10:00 AM to 11:30 PM
+            var showtimes = [];
+            
+            if (showingCount === 1) {
+                // Single showing - prime time
+                showtimes.push("7:30 PM");
+            } else if (showingCount === 2) {
+                // Matinee and evening
+                showtimes.push("1:30 PM", "7:30 PM");
+            } else if (showingCount === 3) {
+                // Morning, afternoon, evening
+                showtimes.push("11:00 AM", "3:00 PM", "7:30 PM");
+            } else if (showingCount === 4) {
+                // Spread throughout the day
+                showtimes.push("11:00 AM", "2:00 PM", "5:30 PM", "9:00 PM");
+            } else if (showingCount === 5) {
+                // Even more spread
+                showtimes.push("10:30 AM", "1:00 PM", "3:30 PM", "6:00 PM", "9:30 PM");
+            } else if (showingCount === 6) {
+                showtimes.push("10:30 AM", "12:30 PM", "2:30 PM", "4:30 PM", "7:00 PM", "9:30 PM");
+            } else if (showingCount === 7) {
+                showtimes.push("10:30 AM", "12:15 PM", "2:00 PM", "3:45 PM", "5:30 PM", "7:30 PM", "9:30 PM");
+            } else if (showingCount >= 8) {
+                // High frequency movies - spread from 10:30 AM to 11:30 PM max
+                var baseShowtimes = [
+                    "10:30 AM", "11:45 AM", "1:00 PM", "2:15 PM", 
+                    "3:30 PM", "4:45 PM", "6:00 PM", "7:15 PM", 
+                    "8:30 PM", "9:45 PM", "11:00 PM"
+                ];
+                
+                // Take the first 'showingCount' showtimes, but never more than available
+                for (var i = 0; i < Math.min(showingCount, baseShowtimes.length); i++) {
+                    showtimes.push(baseShowtimes[i]);
+                }
+                
+                // If we need more showtimes than our base list, fill in gaps
+                if (showingCount > baseShowtimes.length) {
+                    var additionalTimes = [
+                        "11:15 AM", "12:30 PM", "1:45 PM", "3:00 PM", 
+                        "4:15 PM", "5:45 PM", "7:00 PM", "8:15 PM", "10:00 PM"
+                    ];
+                    
+                    for (var j = 0; j < additionalTimes.length && showtimes.length < showingCount; j++) {
+                        if (showtimes.indexOf(additionalTimes[j]) === -1) {
+                            showtimes.push(additionalTimes[j]);
+                        }
+                    }
+                }
+            }
+            
+            // Sort showtimes chronologically
+            return showtimes.sort(function(a, b) {
+                function timeToMinutes(timeStr) {
+                    var parts = timeStr.split(' ');
+                    var time = parts[0].split(':');
+                    var hours = parseInt(time[0]);
+                    var minutes = parseInt(time[1]);
+                    var isPM = parts[1] === 'PM';
+                    
+                    if (isPM && hours !== 12) hours += 12;
+                    if (!isPM && hours === 12) hours = 0;
+                    
+                    return hours * 60 + minutes;
+                }
+                return timeToMinutes(a) - timeToMinutes(b);
+            });
+        }
+
+        function minutesToHoursMinutes(minutes) {
+            const h = Math.floor(minutes / 60);
+            const m = minutes % 60;
+            return `${h}h ${m}m`;
+        }
+
+        function generateMovieHTML(movie, index) {
+            var showtimes = generateRealisticShowtimes(movie.runtime, movie.showings);
+            
+            // Convert title to match your image file naming convention
+            var imageFileName = movie.title.replace(/\//g, ' '); // Replace / with space for Face/Off
+            
+            return '<div class="movie" data-title="' + movie.title + '" data-runtime="' + movie.runtime + ' min" data-rating="' + movie.rating + '">' +
+                '<div class="movie-poster">' +
+                    '<img src="./images/' + imageFileName + '.png" alt="' + movie.title + '" onerror="this.style.display=\'none\'; this.parentElement.style.backgroundColor=\'#456\'; this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;height:100%;color:#9ab;font-size:12px;text-align:center;padding:8px;\\\'>' + movie.title + '</div>\'">' +
+                '</div>' +
+                '<div class="movie-info">' +
+                    '<div class="movie-title">' + movie.title + '</div>' +
+                    '<div class="movie-meta">' +
+                        '<span>' + minutesToHoursMinutes(movie.runtime) + '</span>' +
+                        '<span class="rating-badge">' + movie.rating + '</span>' +
+                    '</div>' +
+                    '<div class="showtimes">' +
+                        '<div class="showtimes-label">Today\'s Showtimes</div>' +
+                        '<div class="showtimes-list">' +
+                            showtimes.map(function(time) { return '<span class="showtime">' + time + '</span>'; }).join('') +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function populateCarousel() {
+            var carouselTrack = document.getElementById('carouselTrack');
+            var moviesPerSlide = 4;
+            var slideHTML = '';
+
+            for (var i = 0; i < movieData.length; i += moviesPerSlide) {
+                slideHTML += '<div class="movie-slide">';
+                
+                for (var j = i; j < i + moviesPerSlide && j < movieData.length; j++) {
+                    slideHTML += generateMovieHTML(movieData[j], j);
+                }
+                
+                slideHTML += '</div>';
+            }
+
+            carouselTrack.innerHTML = slideHTML;
+        }
+
+        class Carousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = Math.ceil(movieData.length / 4);
+                
+                this.track = document.getElementById('carouselTrack');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.counter = document.getElementById('slideCounter');
+                
+                this.init();
+            }
+
+            init() {
+                this.updateCarousel();
+                this.bindEvents();
+            }
+
+            updateCarousel() {
+                const translateX = -(this.currentSlide * 100);
+                this.track.style.transform = `translateX(${translateX}%)`;
+                
+                this.prevBtn.disabled = this.currentSlide === 0;
+                this.nextBtn.disabled = this.currentSlide === this.totalSlides - 1;
+                
+                this.counter.textContent = `${this.currentSlide + 1} of ${this.totalSlides}`;
+            }
+
+            goToSlide(index) {
+                this.currentSlide = Math.max(0, Math.min(index, this.totalSlides - 1));
+                this.updateCarousel();
+            }
+
+            next() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.currentSlide++;
+                    this.updateCarousel();
+                }
+            }
+
+            prev() {
+                if (this.currentSlide > 0) {
+                    this.currentSlide--;
+                    this.updateCarousel();
+                }
+            }
+
+            bindEvents() {
+                this.nextBtn.addEventListener('click', () => this.next());
+                this.prevBtn.addEventListener('click', () => this.prev());
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prev();
+                    if (e.key === 'ArrowRight') this.next();
+                });
+
+                // Touch support
+                let startX = 0;
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+
+                this.track.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) this.next();
+                        else this.prev();
+                    }
+                });
+            }
+        }
+
+        // Search functionality
+        class MovieSearch {
+            constructor() {
+                this.searchBar = document.getElementById('search-bar');
+                this.init();
+            }
+
+            init() {
+                this.searchBar.addEventListener('input', (e) => this.handleSearch(e.target.value));
+            }
+
+            handleSearch(query) {
+                const searchTerm = query.toLowerCase().trim();
+                const movies = document.querySelectorAll('.movie');
+                
+                movies.forEach(movie => {
+                    const title = movie.dataset.title.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || searchTerm === '') {
+                        movie.style.display = 'block';
+                    } else {
+                        movie.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Context menu
+        class ContextMenu {
+            constructor() {
+                this.contextMenu = document.getElementById('context-menu');
+                this.selectedMovie = null;
+                this.collection = [];
+                this.init();
+            }
+
+            init() {
+                document.addEventListener('contextmenu', (e) => this.handleRightClick(e));
+                document.addEventListener('click', () => this.hideMenu());
+                
+                document.getElementById('context-add').addEventListener('click', () => {
+                    if (this.selectedMovie) {
+                        this.addToCollection(this.selectedMovie);
+                        this.hideMenu();
+                    }
+                });
+
+                document.getElementById('context-remove').addEventListener('click', () => {
+                    if (this.selectedMovie) {
+                        this.removeFromCollection(this.selectedMovie);
+                        this.hideMenu();
+                    }
+                });
+            }
+
+            handleRightClick(e) {
+                const movieElement = e.target.closest('.movie');
+                if (movieElement) {
+                    e.preventDefault();
+                    this.selectedMovie = movieElement.dataset.title;
+                    this.showMenu(e.pageX, e.pageY);
+                }
+            }
+
+            showMenu(x, y) {
+                this.contextMenu.style.left = `${x}px`;
+                this.contextMenu.style.top = `${y}px`;
+                this.contextMenu.style.display = 'block';
+            }
+
+            hideMenu() {
+                this.contextMenu.style.display = 'none';
+            }
+
+            addToCollection(movieTitle) {
+                if (!this.collection.includes(movieTitle)) {
+                    this.collection.push(movieTitle);
+                    console.log(`Added "${movieTitle}" to collection`);
+                }
+            }
+
+            removeFromCollection(movieTitle) {
+                const index = this.collection.indexOf(movieTitle);
+                if (index > -1) {
+                    this.collection.splice(index, 1);
+                    console.log(`Removed "${movieTitle}" from collection`);
+                }
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCarousel();
+            new Carousel();
+            new MovieSearch();
+            new ContextMenu();
+        });
+    </script>
 </body>
 </html>
