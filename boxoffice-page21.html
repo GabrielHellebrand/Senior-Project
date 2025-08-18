@@ -3,127 +3,1027 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Movie Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Graphik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #14181c;
+            color: #9ab;
+            line-height: 1.4;
+        }
+
+        header {
+            background-color: #2c3440;
+            padding: 16px 20px;
+            border-bottom: 1px solid #456;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            color: #00e054;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #9ab;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #00e054;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 8px 12px;
+            background-color: #456;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        #search-bar::placeholder {
+            color: #9ab;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #9ab;
+            font-size: 14px;
+        }
+
+        .controls-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #456;
+            color: #9ab;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background: #00e054;
+            color: #14181c;
+            border-color: #00e054;
+        }
+
+        .toggle-btn:hover {
+            background: #456;
+            color: #fff;
+        }
+
+        .toggle-btn.active:hover {
+            background: #00e054;
+            color: #14181c;
+        }
+
+        .revenue-table {
+            background-color: #2c3440;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            display: none;
+        }
+
+        .revenue-table.active {
+            display: block;
+        }
+
+        .table-header {
+            background-color: #456;
+            padding: 16px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .table-content {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .revenue-row {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px 120px 100px;
+            gap: 16px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #456;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .revenue-row:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .revenue-header {
+            font-weight: 600;
+            color: #fff;
+            background-color: #456;
+        }
+
+        .movie-title-cell {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .revenue-amount {
+            color: #00e054;
+            font-weight: 600;
+        }
+
+        .calculated-showings {
+            color: #00e054;
+            font-weight: 600;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .movie-slide {
+            display: flex;
+            min-width: 100%;
+            gap: 12px;
+        }
+
+        .movie {
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            background-color: #2c3440;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .movie:hover {
+            transform: scale(1.02);
+        }
+
+        .movie-poster {
+            width: 100%;
+            aspect-ratio: 27/40;
+            overflow: hidden;
+            position: relative;
+            background-color: #2c3440;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.2s ease;
+        }
+
+        .movie-poster img:not([src]) {
+            background-color: #456;
+        }
+
+        .movie-poster img[src=""] {
+            background-color: #456;
+        }
+
+        .movie-info {
+            padding: 16px 12px;
+            background-color: #2c3440;
+        }
+
+        .movie-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #9ab;
+        }
+
+        .rating-badge {
+            background-color: #456;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .revenue-info {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #456;
+            font-size: 11px;
+        }
+
+        .revenue-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .revenue-info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .revenue-label {
+            color: #9ab;
+        }
+
+        .revenue-value {
+            color: #00e054;
+            font-weight: 600;
+        }
+
+        .calculated-value {
+            color: #00e054;
+            font-weight: 600;
+        }
+
+        .showtimes {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #456;
+        }
+
+        .showtimes-label {
+            font-size: 11px;
+            color: #9ab;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .showtimes-list {
+            font-size: 11px;
+            color: #fff;
+            line-height: 1.4;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .showtime {
+            background-color: #456;
+            padding: 2px 4px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .carousel-nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #456;
+            background: transparent;
+            color: #9ab;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #456;
+            color: #fff;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            color: #9ab;
+            font-size: 14px;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #456;
+        }
+
+        .page-nav-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid #456;
+            color: #9ab;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background: #456;
+            color: #fff;
+        }
+
+        #context-menu {
+            position: absolute;
+            background: #2c3440;
+            border: 1px solid #456;
+            border-radius: 4px;
+            padding: 4px 0;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        #context-menu ul {
+            list-style: none;
+        }
+
+        #context-menu li {
+            padding: 8px 16px;
+            color: #9ab;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        #context-menu li:hover {
+            background: #456;
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            main {
+                padding: 20px 16px;
+            }
+
+            .movie-slide {
+                gap: 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .showtimes-list {
+                font-size: 10px;
+            }
+
+            .movie-info {
+                padding: 12px 8px;
+            }
+
+            .revenue-row {
+                grid-template-columns: 1fr 80px 100px 80px;
+                gap: 8px;
+                font-size: 12px;
+            }
+
+            .revenue-row .theaters-col {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-navigation {
+                flex-direction: column;
+            }
+
+            .carousel-controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .movie-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .controls-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Movie Recommender</h1>
-        <nav>
-            <ul>
-                <li><a href="./index.html">Database</a></li>
-                <li><a href="./boxoffice.html">Box Office</a></li>
-                <li><a href="./comingsoon.html">Coming Soon</a></li>
-                <li><a href="./login.html">login</a></li>
-                <li><a href="./signup.html">Sign Up</a></li>
-                <li><a href="./collection.html">Movie Collection</a></li>
-                <li><a href="./homepage.html">Homepage</a></li>
-                <div id="context-menu">
-                    <ul>
-                        <li id="context-add">Add to Collection</li>
-                        <li id="context-remove">Remove from Collection</li>
-                    </ul>
+        <div class="header-content">
+            <h1>Movie Database</h1>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Database</a></li>
+                    <li><a href="./boxoffice.html">Box Office</a></li>
+                    <li><a href="./comingsoon.html">Coming Soon</a></li>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./signup.html">Sign Up</a></li>
+                    <li><a href="./collection.html">Collection</a></li>
+                    <li><a href="./homepage.html">Homepage</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search films...">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Top 20 Films</h1>
+            <p class="page-subtitle">January 9, 1998 • Box Office Rankings</p>
+        </div>
+
+        <div class="controls-container">
+            <div class="view-toggle">
+                <button class="toggle-btn active" id="carouselView">Carousel View</button>
+                <button class="toggle-btn" id="tableView">Revenue Analysis</button>
+            </div>
+        </div>
+
+        <div class="revenue-table" id="revenueTable">
+            <div class="table-header">
+                Box Office Revenue & Theater Analysis
+            </div>
+            <div class="table-content">
+                <div class="revenue-row revenue-header">
+                    <div>Movie Title</div>
+                    <div>Theaters</div>
+                    <div>Weekend Revenue</div>
+                    <div class="per-theater-col">Per Theater</div>
+                    <div class="theaters-col">Calculated Shows</div>
                 </div>
-            </ul>
-        </nav>
-        <div id="user-info"></div> <!-- Username display -->
-        <input type="text" id="search-bar" placeholder="Search movies...">
-    </header> <main>
-        <section class="movie-list">
-            <h2>January 9 1998</h2>
-            <div class="movies">
-                <div class="movie">
-                    <img src="./images/Titanic.png" alt="Titanic">
-                    <h3>Titanic</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Good Will Hunting.png" alt="Good Will Hunting">
-                    <h3>Good Will Hunting</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/As Good As It Gets.png" alt="As Good As It Gets">
-                    <h3>As Good As It Gets</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Wag the Dog.png" alt="Wag the Dog">
-                    <h3>Wag the Dog</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Tomorrow Never Dies.png" alt="Tomorrow Never Dies">
-                    <h3>Tomorrow Never Dies</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Mousehunt.png" alt="Mousehunt">
-                    <h3>Mousehunt</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Firestorm.png" alt="Firestorm">
-                    <h3>Firestorm</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Jackie Brown.png" alt="Jackie Brown">
-                    <h3>Jackie Brown</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Scream 2.png" alt="Scream 2">
-                    <h3>Scream 2</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Amistad.png" alt="Amistad">
-                    <h3>Amistad</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/An American Werewolf in Paris.png" alt="An American Werewolf in Paris">
-                    <h3>An American Werewolf in Paris</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Flubber.png" alt="Flubber">
-                    <h3>Flubber</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/The Boxer.png" alt="The Boxer">
-                    <h3>The Boxer</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Mr Magoo.png" alt="Mr. Magoo">
-                    <h3>Mr. Magoo</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/For Richer or Poorer.png" alt="For Richer or Poorer">
-                    <h3>For Richer or Poorer</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Home Alone 3.png" alt="Home Alone 3">
-                    <h3>Home Alone 3</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Deconstructing Harry.png" alt="Deconstructing Harry">
-                    <h3>Deconstructing Harry</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/The Postman.png" alt="The Postman">
-                    <h3>The Postman</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/Anastasia.png" alt="Anastasia">
-                    <h3>Anastasia</h3>
-                </div>
-                <div class="movie">
-                    <img src="./images/LA Confidential.png" alt="LA Confidential">
-                    <h3>LA Confidential</h3>
+                <div id="revenueTableContent">
+                    <!-- Revenue data will be populated here -->
                 </div>
             </div>
-            <div class="pagination">
-                <a href="boxoffice-page22.html" class="next-page">→</a>
+        </div>
+
+        <div class="carousel-container" id="carouselContainer">
+            <div class="carousel-controls">
+                <div class="carousel-nav">
+                    <button class="nav-btn" id="prevBtn">‹</button>
+                    <button class="nav-btn" id="nextBtn">›</button>
+                </div>
+                <div class="slide-counter" id="slideCounter">1 of 5</div>
             </div>
-            <div class="pagination">
-                <a href="boxoffice-page20.html" class="prev-page">←</a>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Movies will be dynamically populated -->
+                </div>
             </div>
-        </main>
-        </section>
+
+            <div class="page-navigation">
+                <a href="boxoffice-page20.html" class="page-nav-btn">← Previous Week</a>
+                <a href="boxoffice-page22.html" class="page-nav-btn">Next Week →</a>
+            </div>
+        </div>
     </main>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/movie-detail.js"></script>
-    <script src="./scripts/recommendations.js"></script>
+
+    <div id="context-menu">
+        <ul>
+            <li id="context-add">Add to Collection</li>
+            <li id="context-remove">Remove from Collection</li>
+        </ul>
+    </div>
+
+    <script>
+        // Movie data with complete information including revenue data (in millions)
+        const movieData = [
+            { title: "Titanic", runtime: 194, rating: "PG-13", theaters: 2746, weekendRevenue: 28.7, totalRevenue: 197.9 },
+            { title: "Good Will Hunting", runtime: 127, rating: "R", theaters: 1787, weekendRevenue: 10.3, totalRevenue: 19.0 },
+            { title: "As Good As It Gets", runtime: 139, rating: "PG-13", theaters: 1632, weekendRevenue: 9.0, totalRevenue: 54.0 },
+            { title: "Wag the Dog", runtime: 97, rating: "R", theaters: 1665, weekendRevenue: 7.8, totalRevenue: 9.7 },
+            { title: "Tomorrow Never Dies", runtime: 119, rating: "PG-13", theaters: 2807, weekendRevenue: 7.5, totalRevenue: 103.4 },
+            { title: "MouseHunt", runtime: 98, rating: "PG", theaters: 2233, weekendRevenue: 4.6, totalRevenue: 45.8 },
+            { title: "Firestorm", runtime: 89, rating: "R", theaters: 2037, weekendRevenue: 3.8, totalRevenue: 3.8 },
+            { title: "Jackie Brown", runtime: 154, rating: "R", theaters: 1642, weekendRevenue: 3.7, totalRevenue: 33.4 },
+            { title: "Scream 2", runtime: 120, rating: "R", theaters: 2332, weekendRevenue: 3.6, totalRevenue: 90.8 },
+            { title: "Amistad", runtime: 155, rating: "R", theaters: 773, weekendRevenue: 2.7, totalRevenue: 38.1 },
+            { title: "An American Werewolf In Paris", runtime: 98, rating: "R", theaters: 1659, weekendRevenue: 2.1, totalRevenue: 23.4 },
+            { title: "Flubber", runtime: 93, rating: "PG", theaters: 1624, weekendRevenue: 2.0, totalRevenue: 85.6 },
+            { title: "The Boxer", runtime: 114, rating: "R", theaters: 464, weekendRevenue: 1.8, totalRevenue: 1.9 },
+            { title: "Mr Magoo", runtime: 87, rating: "PG", theaters: 1706, weekendRevenue: 1.7, totalRevenue: 17.9 },
+            { title: "For Richer or Poorer", runtime: 115, rating: "PG-13", theaters: 1359, weekendRevenue: 1.5, totalRevenue: 26.6},
+            { title: "Home Alone 3", runtime: 102, rating: "PG", theaters: 1431, weekendRevenue: 1.4, totalRevenue: 26.2 },
+            { title: "Deconstructing Harry", runtime: 96, rating: "R", theaters: 445, weekendRevenue: 1.2, totalRevenue: 6.7 },
+            { title: "The Postman", runtime: 177, rating: "R", theaters: 1722, weekendRevenue: 1.1, totalRevenue: 16.5 },
+            { title: "Anastasia", runtime: 94, rating: "G", theaters: 958, weekendRevenue: 0.9, totalRevenue: 54.2 },
+            { title: "Alien Resurrection", runtime: 109, rating: "R", theaters: 572, weekendRevenue: 0.4, totalRevenue: 46.7 }
+        ];
+
+        // Box office calculation functions
+        function calculatePerTheaterRevenue(weekendRevenue, theaters) {
+            return (weekendRevenue * 1000000) / theaters;
+        }
+
+        function calculateShowingsFromRevenue(perTheaterRevenue, avgTicketPrice, avgSeatsPerTheater, avgCapacityUsed) {
+            avgTicketPrice = avgTicketPrice || 4.69;
+            avgSeatsPerTheater = avgSeatsPerTheater || 228;
+            avgCapacityUsed = avgCapacityUsed || 0.40;
+            
+            const revenuePerShowing = avgTicketPrice * avgSeatsPerTheater * avgCapacityUsed;
+            return Math.round(perTheaterRevenue / revenuePerShowing);
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function populateRevenueTable() {
+            const tableContent = document.getElementById('revenueTableContent');
+            let tableHTML = '';
+
+            movieData.forEach(function(movie) {
+                const perTheaterRevenue = calculatePerTheaterRevenue(movie.weekendRevenue, movie.theaters);
+                const calculatedShowings = calculateShowingsFromRevenue(perTheaterRevenue);
+                
+                tableHTML += '<div class="revenue-row">' +
+                    '<div class="movie-title-cell">' + movie.title + '</div>' +
+                    '<div>' + movie.theaters.toLocaleString() + '</div>' +
+                    '<div class="revenue-amount">$' + movie.weekendRevenue + 'M</div>' +
+                    '<div class="per-theater-col">' + formatCurrency(perTheaterRevenue) + '</div>' +
+                    '<div class="calculated-showings theaters-col">' + calculatedShowings + '</div>' +
+                '</div>';
+            });
+
+            tableContent.innerHTML = tableHTML;
+        }
+
+        function generateRealisticShowtimes(runtime, showingCount) {
+            var showtimes = [];
+            
+            if (showingCount === 1) {
+                showtimes.push("7:30 PM");
+            } else if (showingCount === 2) {
+                showtimes.push("1:30 PM", "7:30 PM");
+            } else if (showingCount === 3) {
+                showtimes.push("11:00 AM", "3:00 PM", "7:30 PM");
+            } else if (showingCount === 4) {
+                showtimes.push("11:00 AM", "2:00 PM", "5:30 PM", "9:00 PM");
+            } else if (showingCount === 5) {
+                showtimes.push("10:30 AM", "1:00 PM", "3:30 PM", "6:00 PM", "9:30 PM");
+            } else if (showingCount === 6) {
+                showtimes.push("10:30 AM", "12:30 PM", "2:30 PM", "4:30 PM", "7:00 PM", "9:30 PM");
+            } else if (showingCount === 7) {
+                showtimes.push("10:30 AM", "12:15 PM", "2:00 PM", "3:45 PM", "5:30 PM", "7:30 PM", "9:30 PM");
+            } else if (showingCount >= 8) {
+                var baseShowtimes = [
+                    "10:30 AM", "11:45 AM", "1:00 PM", "2:15 PM", 
+                    "3:30 PM", "4:45 PM", "6:00 PM", "7:15 PM", 
+                    "8:30 PM", "9:45 PM", "11:00 PM"
+                ];
+                
+                for (var i = 0; i < Math.min(showingCount, baseShowtimes.length); i++) {
+                    showtimes.push(baseShowtimes[i]);
+                }
+                
+                if (showingCount > baseShowtimes.length) {
+                    var additionalTimes = [
+                        "11:15 AM", "12:30 PM", "1:45 PM", "3:00 PM", 
+                        "4:15 PM", "5:45 PM", "7:00 PM", "8:15 PM", "10:00 PM"
+                    ];
+                    
+                    for (var j = 0; j < additionalTimes.length && showtimes.length < showingCount; j++) {
+                        if (showtimes.indexOf(additionalTimes[j]) === -1) {
+                            showtimes.push(additionalTimes[j]);
+                        }
+                    }
+                }
+            }
+            
+            return showtimes.sort(function(a, b) {
+                function timeToMinutes(timeStr) {
+                    var parts = timeStr.split(' ');
+                    var time = parts[0].split(':');
+                    var hours = parseInt(time[0]);
+                    var minutes = parseInt(time[1]);
+                    var isPM = parts[1] === 'PM';
+                    
+                    if (isPM && hours !== 12) hours += 12;
+                    if (!isPM && hours === 12) hours = 0;
+                    
+                    return hours * 60 + minutes;
+                }
+                return timeToMinutes(a) - timeToMinutes(b);
+            });
+        }
+
+        function minutesToHoursMinutes(minutes) {
+            const h = Math.floor(minutes / 60);
+            const m = minutes % 60;
+            return h + 'h ' + m + 'm';
+        }
+
+        function generateMovieHTML(movie, index) {
+            var perTheaterRevenue = calculatePerTheaterRevenue(movie.weekendRevenue, movie.theaters);
+            var calculatedShowings = calculateShowingsFromRevenue(perTheaterRevenue);
+            var showtimes = generateRealisticShowtimes(movie.runtime, calculatedShowings);
+            
+            var imageFileName = movie.title.replace(/\//g, ' ');
+            
+            var movieHTML = '<div class="movie" data-title="' + movie.title + '" data-runtime="' + movie.runtime + ' min" data-rating="' + movie.rating + '">';
+            movieHTML += '<div class="movie-poster">';
+            movieHTML += '<img src="./images/' + imageFileName + '.png" alt="' + movie.title + '">';
+            movieHTML += '</div>';
+            movieHTML += '<div class="movie-info">';
+            movieHTML += '<div class="movie-title">' + movie.title + '</div>';
+            movieHTML += '<div class="movie-meta">';
+            movieHTML += '<span>' + minutesToHoursMinutes(movie.runtime) + '</span>';
+            movieHTML += '<span class="rating-badge">' + movie.rating + '</span>';
+            movieHTML += '</div>';
+            movieHTML += '<div class="revenue-info">';
+            movieHTML += '<div class="revenue-info-row">';
+            movieHTML += '<span class="revenue-label">Weekend Revenue:</span>';
+            movieHTML += '<span class="revenue-value">$' + movie.weekendRevenue + 'M</span>';
+            movieHTML += '</div>';
+            movieHTML += '<div class="revenue-info-row">';
+            movieHTML += '<span class="revenue-label">Total Revenue:</span>';
+            movieHTML += '<span class="calculated-value">$' + movie.totalRevenue + 'M</span>';
+            movieHTML += '</div>';
+            movieHTML += '<div class="revenue-info-row">';
+            movieHTML += '<span class="revenue-label">Theaters:</span>';
+            movieHTML += '<span class="revenue-value">' + movie.theaters.toLocaleString() + '</span>';
+            movieHTML += '</div>';
+            movieHTML += '<div class="revenue-info-row">';
+            movieHTML += '<span class="revenue-label">Per Theater:</span>';
+            movieHTML += '<span class="revenue-value">' + formatCurrency(perTheaterRevenue) + '</span>';
+            movieHTML += '</div>';
+            movieHTML += '</div>';
+            movieHTML += '<div class="showtimes">';
+            movieHTML += '<div class="showtimes-label">Calculated Showtimes (' + calculatedShowings + ' shows)</div>';
+            movieHTML += '<div class="showtimes-list">';
+            
+            for (var i = 0; i < showtimes.length; i++) {
+                movieHTML += '<span class="showtime">' + showtimes[i] + '</span>';
+            }
+            
+            movieHTML += '</div>';
+            movieHTML += '</div>';
+            movieHTML += '</div>';
+            movieHTML += '</div>';
+            
+            return movieHTML;
+        }
+
+        function populateCarousel() {
+            var carouselTrack = document.getElementById('carouselTrack');
+            var moviesPerSlide = 4;
+            var slideHTML = '';
+
+            for (var i = 0; i < movieData.length; i += moviesPerSlide) {
+                slideHTML += '<div class="movie-slide">';
+                
+                for (var j = i; j < i + moviesPerSlide && j < movieData.length; j++) {
+                    slideHTML += generateMovieHTML(movieData[j], j);
+                }
+                
+                slideHTML += '</div>';
+            }
+
+            carouselTrack.innerHTML = slideHTML;
+        }
+
+        class ViewToggle {
+            constructor() {
+                this.carouselBtn = document.getElementById('carouselView');
+                this.tableBtn = document.getElementById('tableView');
+                this.carouselContainer = document.getElementById('carouselContainer');
+                this.revenueTable = document.getElementById('revenueTable');
+                
+                this.init();
+            }
+
+            init() {
+                this.carouselBtn.addEventListener('click', () => this.showCarousel());
+                this.tableBtn.addEventListener('click', () => this.showTable());
+            }
+
+            showCarousel() {
+                this.carouselBtn.classList.add('active');
+                this.tableBtn.classList.remove('active');
+                this.carouselContainer.style.display = 'block';
+                this.revenueTable.classList.remove('active');
+            }
+
+            showTable() {
+                this.tableBtn.classList.add('active');
+                this.carouselBtn.classList.remove('active');
+                this.carouselContainer.style.display = 'none';
+                this.revenueTable.classList.add('active');
+            }
+        }
+
+        class Carousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = Math.ceil(movieData.length / 4);
+                
+                this.track = document.getElementById('carouselTrack');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.counter = document.getElementById('slideCounter');
+                
+                this.init();
+            }
+
+            init() {
+                this.updateCarousel();
+                this.bindEvents();
+            }
+
+            updateCarousel() {
+                const translateX = -(this.currentSlide * 100);
+                this.track.style.transform = 'translateX(' + translateX + '%)';
+                
+                this.prevBtn.disabled = this.currentSlide === 0;
+                this.nextBtn.disabled = this.currentSlide === this.totalSlides - 1;
+                
+                this.counter.textContent = (this.currentSlide + 1) + ' of ' + this.totalSlides;
+            }
+
+            goToSlide(index) {
+                this.currentSlide = Math.max(0, Math.min(index, this.totalSlides - 1));
+                this.updateCarousel();
+            }
+
+            next() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.currentSlide++;
+                    this.updateCarousel();
+                }
+            }
+
+            prev() {
+                if (this.currentSlide > 0) {
+                    this.currentSlide--;
+                    this.updateCarousel();
+                }
+            }
+
+            bindEvents() {
+                const self = this;
+                this.nextBtn.addEventListener('click', function() { self.next(); });
+                this.prevBtn.addEventListener('click', function() { self.prev(); });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowLeft') self.prev();
+                    if (e.key === 'ArrowRight') self.next();
+                });
+
+                let startX = 0;
+                this.track.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                });
+
+                this.track.addEventListener('touchend', function(e) {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) self.next();
+                        else self.prev();
+                    }
+                });
+            }
+        }
+
+        class MovieSearch {
+            constructor() {
+                this.searchBar = document.getElementById('search-bar');
+                this.init();
+            }
+
+            init() {
+                const self = this;
+                this.searchBar.addEventListener('input', function(e) {
+                    self.handleSearch(e.target.value);
+                });
+            }
+
+            handleSearch(query) {
+                const searchTerm = query.toLowerCase().trim();
+                const movies = document.querySelectorAll('.movie');
+                const revenueRows = document.querySelectorAll('.revenue-row:not(.revenue-header)');
+                
+                movies.forEach(function(movie) {
+                    const title = movie.dataset.title.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || searchTerm === '') {
+                        movie.style.display = 'block';
+                    } else {
+                        movie.style.display = 'none';
+                    }
+                });
+
+                revenueRows.forEach(function(row) {
+                    const titleCell = row.querySelector('.movie-title-cell');
+                    if (titleCell) {
+                        const title = titleCell.textContent.toLowerCase();
+                        
+                        if (title.includes(searchTerm) || searchTerm === '') {
+                            row.style.display = 'grid';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+            }
+        }
+
+        class ContextMenu {
+            constructor() {
+                this.contextMenu = document.getElementById('context-menu');
+                this.selectedMovie = null;
+                this.collection = [];
+                this.init();
+            }
+
+            init() {
+                const self = this;
+                document.addEventListener('contextmenu', function(e) { self.handleRightClick(e); });
+                document.addEventListener('click', function() { self.hideMenu(); });
+                
+                document.getElementById('context-add').addEventListener('click', function() {
+                    if (self.selectedMovie) {
+                        self.addToCollection(self.selectedMovie);
+                        self.hideMenu();
+                    }
+                });
+
+                document.getElementById('context-remove').addEventListener('click', function() {
+                    if (self.selectedMovie) {
+                        self.removeFromCollection(self.selectedMovie);
+                        self.hideMenu();
+                    }
+                });
+            }
+
+            handleRightClick(e) {
+                const movieElement = e.target.closest('.movie');
+                const revenueRow = e.target.closest('.revenue-row:not(.revenue-header)');
+                
+                if (movieElement) {
+                    e.preventDefault();
+                    this.selectedMovie = movieElement.dataset.title;
+                    this.showMenu(e.pageX, e.pageY);
+                } else if (revenueRow) {
+                    e.preventDefault();
+                    const titleCell = revenueRow.querySelector('.movie-title-cell');
+                    if (titleCell) {
+                        this.selectedMovie = titleCell.textContent;
+                        this.showMenu(e.pageX, e.pageY);
+                    }
+                }
+            }
+
+            showMenu(x, y) {
+                this.contextMenu.style.left = x + 'px';
+                this.contextMenu.style.top = y + 'px';
+                this.contextMenu.style.display = 'block';
+            }
+
+            hideMenu() {
+                this.contextMenu.style.display = 'none';
+            }
+
+            addToCollection(movieTitle) {
+                if (this.collection.indexOf(movieTitle) === -1) {
+                    this.collection.push(movieTitle);
+                    console.log('Added "' + movieTitle + '" to collection');
+                }
+            }
+
+            removeFromCollection(movieTitle) {
+                const index = this.collection.indexOf(movieTitle);
+                if (index > -1) {
+                    this.collection.splice(index, 1);
+                    console.log('Removed "' + movieTitle + '" from collection');
+                }
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCarousel();
+            populateRevenueTable();
+            new ViewToggle();
+            new Carousel();
+            new MovieSearch();
+            new ContextMenu();
+        });
+    </script>
 </body>
 </html>
